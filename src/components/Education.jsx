@@ -1,12 +1,65 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+const Container = styled.div`
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+`;
+
+const Title = styled.h2`
+  color: #333;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+const FormField = styled.div`
+  margin-bottom: 10px;
+`;
+
+const Label = styled.label`
+  margin-right: 10px;
+`;
+
+const Input = styled.input`
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+`;
+
+const Button = styled.button`
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
+const InfoDisplay = styled.div`
+  p {
+    margin: 5px 0;
+  }
+`;
+
 const Education = () => {
   const [isEditing, setIsEditing] = useState(true);
   const [education, setEducation] = useState({
-    schoolNmae: "",
-    titleOfStudy: "",
-    dateOfStudy: "",
+    school: "",
+    title: "",
+    date: "",
   });
 
   const handleChange = (e) => {
@@ -24,52 +77,51 @@ const Education = () => {
   };
 
   return (
-    <div>
-      {" "}
-      <h2>Education</h2>
+    <Container>
+      <Title>Education</Title>
       {isEditing ? (
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="school">School Name:</label>
-            <input
+        <Form onSubmit={handleSubmit}>
+          <FormField>
+            <Label htmlFor="school">School Name:</Label>
+            <Input
               type="text"
               name="school"
               value={education.school}
               onChange={handleChange}
               placeholder="University of Life"
             />
-          </div>
-          <div>
-            <label htmlFor="title">Title of Study:</label>
-            <input
+          </FormField>
+          <FormField>
+            <Label htmlFor="title">Title of Study:</Label>
+            <Input
               type="text"
               name="title"
               value={education.title}
               onChange={handleChange}
               placeholder="Bachelor of Science"
             />
-          </div>
-          <div>
-            <label htmlFor="date">Date of Study:</label>
-            <input
+          </FormField>
+          <FormField>
+            <Label htmlFor="date">Date of Study:</Label>
+            <Input
               type="text"
               name="date"
               value={education.date}
               onChange={handleChange}
               placeholder="2010-2014"
             />
-          </div>
-          <button type="submit">Submit</button>
-        </form>
+          </FormField>
+          <Button type="submit">Submit</Button>
+        </Form>
       ) : (
-        <div>
-          <p>School Name:</p> {education.school}
-          <p>Title of Study:</p> {education.title}
-          <p>Date of Study:</p> {education.date}
-          <button onClick={handleEdit}>Edit</button>
-        </div>
+        <InfoDisplay>
+          <p>School Name: {education.school}</p>
+          <p>Title of Study: {education.title}</p>
+          <p>Date of Study: {education.date}</p>
+          <Button onClick={handleEdit}>Edit</Button>
+        </InfoDisplay>
       )}
-    </div>
+    </Container>
   );
 };
 
